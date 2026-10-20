@@ -17,17 +17,18 @@ test_option = st.selectbox(
 )
 
 if st.button("Predict Transaction Status"):
-  # The model expects the number of features it was trained on (V1-V28 + NormalizedAmount)
   num_features = len(model.feature_names_in_)
 
   if test_option.startswith("Simulate Legitimate"):
-    # Normal transaction pattern (zeros/baseline)
-    sample_data = np.zeros((1, num_features))
-    sample_data[0, -1] = 25.0  # Normal small amount
+    # Generate subtle, normal-looking feature values instead of pure zeros
+    np.random.seed(42)
+    sample_data = np.random.normal(0, 0.5, size=(1, num_features))
+    sample_data[0, -1] = 35.0  # Normal small transaction amount
   else:
-    # Suspicious anomaly pattern (random high variance values)
-    sample_data = np.random.randn(1, num_features) * 4
-    sample_data[0, -1] = 4500.0  # High amount
+    # Suspicious anomaly pattern
+    np.random.seed(100)
+    sample_data = np.random.randn(1, num_features) * 4.5
+    sample_data[0, -1] = 6500.0  # Unusually high amount
 
   # Make prediction
   prediction = model.predict(sample_data)
