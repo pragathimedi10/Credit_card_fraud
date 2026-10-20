@@ -1,4 +1,4 @@
-# 💳 Credit Card Fraud Detection System
+# 💳 ML Driven - Credit Card Fraud Detection System
 
 An end-to-end Machine Learning web application designed to detect fraudulent financial transactions in real time. The system leverages a **Random Forest Classifier** trained on transaction data and features an interactive web dashboard built with **Streamlit** for instant risk assessment.
 
